@@ -1,6 +1,6 @@
-locals {
-  instance_name = lower(var.name)
-}
+# locals {
+#   instance_name = "InstanceName" # lower(var.name)
+# }
 
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -19,17 +19,18 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "this" {
+  for_each = var.instances
   ami           = data.aws_ami.ubuntu.id
   instance_type = var.instance_type
 
   tags = {
-    Name = local.instance_name
+    Name = each.key
   }
 }
 
-resource "aws_instance" "db" {
-  # count = var.db_feature && var.env == "prod" ? 1 : 0
-  count         = var.db_feature ? 1 : 0
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = var.instance_type
-}
+# resource "aws_instance" "db" {
+#   # count = var.db_feature && var.env == "prod" ? 1 : 0
+#   # count         = var.db_feature ? 1 : 0
+#   ami           = data.aws_ami.ubuntu.id
+#   instance_type = var.instance_type
+# }

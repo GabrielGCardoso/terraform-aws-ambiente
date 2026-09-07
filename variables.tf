@@ -6,13 +6,18 @@ variable "instance_type" {
   sensitive = false
 }
 
-variable "name" {
-  type        = string
-  description = "Name of environment"
-}
+# variable "name" {
+#   type        = string
+#   description = "Name of environment"
+# }
 
-variable "db_feature" {
-  type        = bool
-  default     = false
-  description = "Enable DB feature"
+# variable "db_feature" {
+#   type        = bool
+#   default     = false
+#   description = "Enable DB feature"
+# }
+
+variable "instances" {
+  type = set(string)
+  description = "List of instance names to create"
 }
