@@ -19,13 +19,26 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "this" {
-  for_each = var.instances
   ami           = data.aws_ami.ubuntu.id
   instance_type = each.value["instance_type"]
 
   tags = {
-    Name = each.key
-    Plataforma = each.value["plataforma"]
+    Name = "name"
+  }
+  
+  # Exemplo ebs hard coded
+  # ebs_block_device {
+  #   device_name = "/dev/sdb"
+  #   volume_size = "50"
+  # }
+
+  dynamic "ebs_block_device" {
+    for_each = var.volumes-extras
+
+    content {
+      device_name = ebs_block_device.value["device_name"]
+      volume_size = ebs_block_device.value["volume_size"]
+    }
   }
 }
 

@@ -17,12 +17,19 @@ variable "instance_type" {
 #   description = "Enable DB feature"
 # }
 
-variable "instances" {
-  type = map(
-    object({
-      instance_type = string
-      plataforma = string
-    })
-  )
-  description = "List of instance names to create"
+# variable "instances" {
+#   type = map(
+#     object({
+#       instance_type = string
+#       plataforma = string
+#     })
+#   )
+#   description = "List of instance names to create"
+# }
+
+variable "volumes-extras" {
+  type = map(object({
+    device_name = string
+    volume_size = string
+  }))
 }
