@@ -21,7 +21,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "this" {
   for_each = var.instances
   ami           = data.aws_ami.ubuntu.id
-  instance_type = var.instance_type
+  instance_type = each.value
 
   tags = {
     Name = each.key

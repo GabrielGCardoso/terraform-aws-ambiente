@@ -18,6 +18,6 @@ variable "instance_type" {
 # }
 
 variable "instances" {
-  type = set(string)
+  type = map(string)
   description = "List of instance names to create"
 }
