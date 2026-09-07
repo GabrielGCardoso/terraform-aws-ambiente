@@ -26,3 +26,10 @@ resource "aws_instance" "this" {
     Name = local.instance_name
   }
 }
+
+resource "aws_instance" "db" {
+  # count = var.db_feature && var.env == "prod" ? 1 : 0
+  count         = var.db_feature ? 1 : 0
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = var.instance_type
+}

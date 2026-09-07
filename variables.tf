@@ -10,3 +10,9 @@ variable "name" {
   type        = string
   description = "Name of environment"
 }
+
+variable "db_feature" {
+  type        = bool
+  default     = false
+  description = "Enable DB feature"
+}
