@@ -18,6 +18,11 @@ variable "instance_type" {
 # }
 
 variable "instances" {
-  type = map(string)
+  type = map(
+    object({
+      instance_type = string
+      plataforma = string
+    })
+  )
   description = "List of instance names to create"
 }
