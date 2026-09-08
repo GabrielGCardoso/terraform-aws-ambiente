@@ -1,4 +1,4 @@
 output "instance_ip" {
   description = "IP privado da maquina virtual"
-  value       = aws_instance.this.private_ip
+  value       = { for key, instance in aws_instance.this : key => instance.private_ip }
 }
