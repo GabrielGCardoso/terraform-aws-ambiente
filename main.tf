@@ -25,6 +25,14 @@ resource "aws_instance" "this" {
   tags = {
     Name = local.instance_name
   }
+
+  metadata_options {
+    http_tokens = "required"
+  }
+
+  root_block_device {
+    encrypted = true
+  }
 }
 
 resource "aws_instance" "db" {
